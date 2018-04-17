@@ -1,0 +1,22 @@
+{
+  "name": "final-project",
+  "version": "1.0.0",
+  "description": "1st take on a README",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tbukachevskyy/CIS197FP.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tbukachevskyy/CIS197FP/issues"
+  },
+  "homepage": "https://github.com/tbukachevskyy/CIS197FP#readme",
+  "dependencies": {
+    "express": "^4.16.3"
+  }
+}

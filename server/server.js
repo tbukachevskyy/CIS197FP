@@ -5,10 +5,7 @@ const mongoose = require('mongoose');
 //const jwt = require('jsonwebtoken');
 const Event = require('/models/events');
 
-//const config = require('./config');
-
 mongoose.connect(process.env.MONGODB_URI || config.database);
-
 
 
 mongoose.Promise = global.Promise;
@@ -25,30 +22,8 @@ app.use(bodyParser.json());
 // static directory setup
 //app.use(express.static(path.join(__dirname, '..', 'public')));
 
-
-app.post('/new', function(req, res) {
-  Event.createPost(req.body.title, req.body.description, req.body.date, 
-    req.body.location, req.body.organization, req.body.foodtypes, req.body.attendanceReq)
-    .then((event) => {
-      res.json({respose: 'success', data: event});
-    })
-    .catch((err) => {
-      res.json({response: 'failure', data: err});
-    });
-});
-
-app.get('/events', function(req, res) {
-  Event.getAllPosts()
-  .then((events) => {
-    events = events.sort((a,b) => {
-      return b.date - a.date;
-    });
-    res.json({response: 'success', data: events});
-  })
-  .catch((err) => {
-    res.json({response: 'failure', data: err});
-  });
-});
+import apiRouter from './routes/apiRouter'
+app.use('/api', apiRouter);
 
 // set up app to listen on port 3000  or any env port specified
 app.listen(process.env.PORT || 3000, () => {
