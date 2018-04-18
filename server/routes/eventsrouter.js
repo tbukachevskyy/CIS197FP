@@ -1,8 +1,9 @@
 import express from 'express';
+import Event from '../models/events'
 
-let apiRouter = express.Router();
+let eventsRouter = express.Router();
 
-apiRouter.post('/new', function(req, res) {
+eventsRouter.post('/new', function(req, res) {
     Event.createPost(req.body.title, req.body.description, req.body.date, 
       req.body.location, req.body.organization, req.body.foodtypes, req.body.attendanceReq)
       .then((event) => {
@@ -13,7 +14,7 @@ apiRouter.post('/new', function(req, res) {
       });
   });
 
-  apiRouter.get('/events', function(req, res) {
+  eventsRouter.get('/events', function(req, res) {
     Event.getAllPosts()
     .then((events) => {
       events = events.sort((a,b) => {
@@ -26,4 +27,4 @@ apiRouter.post('/new', function(req, res) {
     });
   });
 
-  module.export = apiRouter;
+  module.export = eventsRouter;

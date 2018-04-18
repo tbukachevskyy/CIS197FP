@@ -4,10 +4,10 @@ import { connect } from 'react-redux';
 class EventList extends Component {
     constructor(props) {
         super(props);
-        this.state = {events:[],interval:0};
+        this.state = {events:[],interval:0, filter: {}};
     }
 
-    getAllTweets = () => {
+    getFilteredTweets = () => {
         fetch('/events', {
             method: 'GET'
         })
