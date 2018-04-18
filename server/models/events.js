@@ -40,16 +40,4 @@ eventSchema.statics.createEvent = function (title, description, date, location,
     return newPost.save();
 }
 
-postSchema.statics.filterEventsByFood = function(foodTypes) {
-    return this.find({foodTypes: foodTypes});
-}
-
-postSchema.statics.filterEventsByAttendence = function(bool) {
-    return this.find({eventAttendenceRequired: bool});
-}
-
-postSchema.statics.getAllEvents = function() {
-    return this.find({});
-}
-
 module.exports = mongoose.model('Events', eventSchema);

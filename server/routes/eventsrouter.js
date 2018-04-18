@@ -14,8 +14,8 @@ eventsRouter.post('/new', function(req, res) {
       });
   });
 
-  eventsRouter.get('/events', function(req, res) {
-    Event.getAllPosts()
+  eventsRouter.get('/events:attendance:?food', function(req, res) {
+    Event.find({eventAttendanceRequired: attendance, foodTypes: food})
     .then((events) => {
       events = events.sort((a,b) => {
         return b.date - a.date;

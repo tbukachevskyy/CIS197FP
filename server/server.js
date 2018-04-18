@@ -22,8 +22,11 @@ app.use(bodyParser.json());
 // static directory setup
 //app.use(express.static(path.join(__dirname, '..', 'public')));
 
-import apiRouter from './routes/apiRouter'
-app.use('/api', apiRouter);
+import eventsRouter from './routes/eventsRouter';
+app.use('/events', apiRouter);
+
+import userRouter from './routes/userRouter';
+app.use('/user', userRouter)
 
 // set up app to listen on port 3000  or any env port specified
 app.listen(process.env.PORT || 3000, () => {
