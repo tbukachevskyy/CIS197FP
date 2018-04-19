@@ -1,7 +1,8 @@
-import Component from 'react'
+import React, { Component } from 'react'
 import changeFilter from '../actions/eventActions';
+import { connect } from 'react-redux';
 
-class FilterControl extends Componenet {
+class FilterControl extends Component {
     constructor(props) {
         super(props);
     }
@@ -12,13 +13,13 @@ class FilterControl extends Componenet {
         let filter = {
             attendanceReq: this.refs.attendance.value == 'on' ? 'true' : 'false'
         };
-        dispatch(changeFilter(filter));
+        this.props.changeFilter(filter);
     }
 
     render() {
-        (
+        return (
             <div>
-                <form onSubmit={submit.bind(this)}>
+                <form onSubmit={this.submit.bind(this)}>
                     Filter by attendance requirement? <br/>
                     <input type="checkbox" ref="attendance"/>
                     <input type="submit"/>
@@ -27,3 +28,9 @@ class FilterControl extends Componenet {
         );
     }
 }
+
+let mapDispatchToProps = (dispatch) => ({
+    changeFilter: (filter) => dispatch(changeFilter(filter))
+})
+
+export default connect(null, mapDispatchToProps)(FilterControl);

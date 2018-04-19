@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import FilterControl from './FilterControl';
+import getFilteredEvents from '../actions/eventActions'
 
 class EventList extends Component {
     constructor(props) {
@@ -8,17 +9,19 @@ class EventList extends Component {
     }
 
     componentDidMount() {
-        this.setState({interval: setInterval(this.props.loadEvents, 2500)});
+        this.setState({interval: setInterval(() => this.props.loadEvents(this.props.filter), 2500)});
+        console.log(this.props);
+        console.log(this.state);
     }
 
-    componenetWillUnmount() {
+    componentWillUnmount() {
         clearInterval(this.state.interval);
     }
 
     render() {
         return (
             <div>
-                <FilterControl/>
+                <FilterControl />
                 <div>
                     {this.props.events.map((event, key) => <Event event={event} key={key}/>)}
                 </div>
@@ -27,14 +30,12 @@ class EventList extends Component {
     }
 }
 
-const mapDispatchToProps = dispatch => ({
-    loadEvents: () => dispatch(getFilteredEvents(this.props.filter))
+let mapDispatchToProps = (dispatch) => ({
+    loadEvents: (filter) => dispatch(getFilteredEvents(filter))
 });
 
-const mapStateToProps = state => state;
+let mapStateToProps = state => state;
 
 
 export default connect(
-mapStateToProps,
-mapDispatchToProps
-)(TweetList);
+mapStateToProps, mapDispatchToProps)(EventList);

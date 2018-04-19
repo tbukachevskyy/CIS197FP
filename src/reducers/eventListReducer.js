@@ -1,6 +1,6 @@
 
 
-const eventListReducer = (state={events:[], filter: {}}, action) => {
+export var eventListReducer = (state={events:[], filter: {}}, action) => {
     if (action.type == 'LOAD_EVENTS') {
         newState = Object.assign({}, state);
         newState.events = action.events;

@@ -4,7 +4,7 @@ import { favoriteTweet } from '../actions/tweetActions';
 import { Link } from 'react-router-dom';
 
 class Event extends Component {
-    constuctor(props) {
+    constructor(props) {
         super(props);
     }
 

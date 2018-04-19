@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { createNewEvent } from '../actions/eventActions';
 
 class CreateEvent extends Component {
     constructor(props) {
         super(props);
     }
 
-    signUp(e) {
+    submit(e) {
+        e.preventDefault();
         let info = {
             title: this.refs.title.value,
             description: this.refs.description.value,
@@ -32,8 +32,8 @@ class CreateEvent extends Component {
     }
 
     render() {
-        (
-            <form onSubmit={signUp.bind(this)}>
+        return (
+            <form onSubmit={this.submit.bind(this)}>
             <label>Title</label>
             <input type="text" ref="title"/>
             <label>Description</label>
@@ -48,7 +48,10 @@ class CreateEvent extends Component {
             <input type="text" ref="organization"/>
             <label>Attendance for Event Required?></label>
             <input type="checkbox" ref="attendance"/>
+            <input type="submit"/>
             </form>
-        )
+        );
     }
 }
+
+export default CreateEvent;

@@ -3,8 +3,9 @@ import {
   Route,
   Switch,
 } from 'react-router-dom';
-import CreateEvent from './EventList';
+import CreateEvent from './CreateEvent';
 import EventList from './EventList';
+import FilterControl from './FilterControl'
 
 class App extends Component {
   constructor(props) {
@@ -16,8 +17,8 @@ class App extends Component {
       <div>
         <div>
           <Switch>
+          <Route path='/create' component={CreateEvent}/>
           <Route path='/' component={EventList}/>
-          <Route path='/new' componenet={CreateEvent}/>
           </Switch>
         </div>
       </div>

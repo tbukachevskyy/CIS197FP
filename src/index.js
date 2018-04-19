@@ -5,6 +5,8 @@ import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import logger from 'redux-logger';
 import thunkMiddleware from 'redux-thunk';
+import App from './components/App';
+import eventListReducer from './reducers/eventListReducer'
 
 let createStoreWithMiddleware = applyMiddleware(thunkMiddleware, logger)(createStore)
 const store = createStoreWithMiddleware(eventListReducer);
