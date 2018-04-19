@@ -12,7 +12,7 @@ userRouter.post('/new', function(req, res) {
     });
 });
 
-userRouter.post('signin', function(req, res) {
+userRouter.post('/signin', function(req, res) {
     Users.verify(req.body.username, req.body.password)
     .then((result) => {
         if (result) {
