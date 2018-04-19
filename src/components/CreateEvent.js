@@ -8,14 +8,27 @@ class CreateEvent extends Component {
     }
 
     signUp(e) {
-        let title = this.refs.title.value;
-        let description = this.refs.description.value;
-        let date = this.refs.date.value;
-        let time = this.refs.time.value;
-        let location = this.refs.location.value;
-        let organization = this.refs.organization.value;
-        let attendance = (this.refs.attendance.value == 'on') ? true : false;
-        dispatch(createNewEvent(info))
+        let info = {
+            title: this.refs.title.value,
+            description: this.refs.description.value,
+            date: this.refs.date.value,
+            time: this.refs.time.value,
+            location: this.refs.location.value,
+            organization: this.refs.organization.value,
+            attendance: (this.refs.attendance.value == 'on') ? true : false
+        }
+        let config = {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(info)
+        };
+        fetch('/events/new', config)
+        .then(() => {
+            console.log('uploaded')
+        })
+        .catch((err) => {
+            console.log(err.message)
+        });
     }
 
     render() {

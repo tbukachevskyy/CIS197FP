@@ -29,22 +29,3 @@ export function changeFilter(filter) {
         filter: filter
     });
 };
-
-export function createNewEvent(info) {
-    let config = {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify(info)
-    };
-    fetch('/events/new', config)
-    .then((res) => {
-        return dispatch => {
-            dispatch({
-                type: 'CREATED EVENT',
-                tweet: res.data
-            })
-        };
-    }).catch((err) => {
-        console.log(err.message);
-    });
-}

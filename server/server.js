@@ -2,7 +2,6 @@ const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-//const jwt = require('jsonwebtoken');
 const Event = require('/models/events');
 
 mongoose.connect(process.env.MONGODB_URI);

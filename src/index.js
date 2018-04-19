@@ -7,7 +7,7 @@ import logger from 'redux-logger';
 import thunkMiddleware from 'redux-thunk';
 
 let createStoreWithMiddleware = applyMiddleware(thunkMiddleware, logger)(createStore)
-//const store = createStoreWithMiddleware(eventListReducer);
+const store = createStoreWithMiddleware(eventListReducer);
 
 render(
     <Provider store={store}>

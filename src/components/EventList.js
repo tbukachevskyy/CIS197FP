@@ -23,8 +23,16 @@ class EventList extends Component {
             </div>
         )
     }
-
-    mapDispatchToProps = dispatch => ({
-        loadEvents: (filter) => dispatch(getFilteredEvents(filter))
-    });
 }
+
+const mapDispatchToProps = dispatch => ({
+    loadEvents: (filter) => dispatch(getFilteredEvents(filter))
+});
+
+const mapStateToProps = state => state;
+
+
+export default connect(
+mapStateToProps,
+mapDispatchToProps
+)(TweetList);
