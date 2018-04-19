@@ -1,12 +1,11 @@
 
 export function getFilteredEvents(filter) {
-    url = '/events?'
-    url = filter.attendance ? url + 'attendance=true' : url + 'attendance=false';
-    url = filter.foodType ? url + ('&type=' + filter.foodType) : url;
+    url = '/events'
     let config = {
-        method: 'GET',
+        method: 'POST',
         headers: {'Content-Type': 'application/json'},
-      };
+        body: JSON.stringify(filter)
+    };
     fetch(url, config)
     .then((res) => {
         return res.json();
