@@ -2,15 +2,18 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const eventSchema = new Schema({
-    eventAttendanceRequired: Boolean,
-    organization: String,
+    eventAttendanceRequired: {
+        type: Boolean,
+        required: true
+    },
+    organization: {
+        type: String,
+        required: true
+    },
     title: {
         type: String,
         rquired: true,
     },
-    foodTypes: [{
-        type: String,
-    }],
     date: {
         type: Date,
         required: true,
@@ -26,14 +29,13 @@ const eventSchema = new Schema({
 });
 
 eventSchema.statics.createEvent = function (title, description, date, location, 
-    organization='Unknown', foodtypes=['none'], attendanceReq=true) {
+    organization, attendanceReq) {
     let newPost = new this({
         location: location,
         title: title,
         description: description,
         organization: organization,
         date: date,
-        foodtypes: foodtypes,
         eventAttendanceRequired: attendanceReq
     });
 

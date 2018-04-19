@@ -2,9 +2,9 @@ const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-const Event = require('/models/events');
+const Event = require('./models/events');
 
-mongoose.connect(process.env.MONGODB_URI);
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/birdjs');
 
 
 mongoose.Promise = global.Promise;
@@ -18,11 +18,11 @@ app.use(bodyParser.json());
 
 app.use(express.static(path.join(__dirname, '..', 'public')));
 
-import eventsRouter from './routes/eventsRouter';
-app.use('/events', apiRouter);
+const eventsRouter = require('./routes/eventsRouter');
+app.use('/events', eventsRouter);
 
-import userRouter from './routes/userRouter';
-app.use('/user', userRouter)
+//const userRouter =  require('./routes/userRouter');
+//app.use('/user', userRouter);
 
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '..', 'public', 'index.html'));

@@ -8,7 +8,10 @@ class FilterControl extends Componenet {
 
 
     submit(e) {
-        let filter = {};
+        e.preventDefault();
+        let filter = {
+            attendanceReq: this.refs.attendance.value == 'on' ? 'true' : 'false'
+        };
         dispatch(changeFilter(filter));
     }
 
@@ -16,10 +19,8 @@ class FilterControl extends Componenet {
         (
             <div>
                 <form onSubmit={submit.bind(this)}>
-                    Food Type <br/>
-                    <input type="text" name="foodtype"/>
                     Filter by attendance requirement? <br/>
-                    <input type="checkbox" name="attendance"/>
+                    <input type="checkbox" ref="attendance"/>
                     <input type="submit"/>
                 </form>
             </div>

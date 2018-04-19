@@ -1,13 +1,16 @@
-import express from 'express';
-import Event from '../models/events'
+const express = require('express');
+const Event = require('../models/events');
 
 let eventsRouter = express.Router();
 
 eventsRouter.post('/new', function(req, res) {
-    Event.createPost(req.body.title, req.body.description, req.body.date, 
-      req.body.location, req.body.organization, req.body.foodtypes, req.body.attendanceReq)
+  let date = new Date(req.body.date + 'T' + req.body.time);
+  console.log(req.body.date + 'T' + req.body.time);
+  let attendanceReq = req.body.attendanceReq == 'true' ? true : false
+    Event.createEvent(req.body.title, req.body.description, date, 
+      req.body.location, req.body.organization, attendanceReq)
       .then((event) => {
-        res.json({respose: 'success', data: event});
+        res.json({response: 'success', data: event});
       })
       .catch((err) => {
         res.json({response: 'failure', data: err});
@@ -15,7 +18,12 @@ eventsRouter.post('/new', function(req, res) {
   });
 
   eventsRouter.post('/events', function(req, res) {
-    Event.find({eventAttendanceRequired: req.body.attendanceReq, foodTypes: req.body.food})
+    let config = {};
+    if (req.body.attendanceReq === 'true') {
+      config.eventAttendanceRequired = true
+    }
+
+    Event.find(config)
     .then((events) => {
       events = events.sort((a,b) => {
         return b.date - a.date;
@@ -27,4 +35,4 @@ eventsRouter.post('/new', function(req, res) {
     });
   });
 
-  module.export = eventsRouter;
+  module.exports = eventsRouter;

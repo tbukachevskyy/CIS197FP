@@ -8,17 +8,19 @@ class EventList extends Component {
     }
 
     componentDidMount() {
+        this.setState({interval: setInterval(this.props.loadEvents, 2500)});
     }
 
     componenetWillUnmount() {
+        clearInterval(this.state.interval);
     }
-    
+
     render() {
         return (
             <div>
                 <FilterControl/>
                 <div>
-                    {this.state.events.map((event, key) => <Event event={event} key={key}/>)}
+                    {this.props.events.map((event, key) => <Event event={event} key={key}/>)}
                 </div>
             </div>
         )
@@ -26,7 +28,7 @@ class EventList extends Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-    loadEvents: (filter) => dispatch(getFilteredEvents(filter))
+    loadEvents: () => dispatch(getFilteredEvents(this.props.filter))
 });
 
 const mapStateToProps = state => state;
