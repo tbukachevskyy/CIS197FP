@@ -22,7 +22,7 @@ class CreateEvent extends Component {
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(info)
         };
-        fetch('/events/new', config)
+        fetch('/api/new', config)
         .then(() => {
             console.log('uploaded')
         })
@@ -46,7 +46,7 @@ class CreateEvent extends Component {
             <input type="text" ref="location"/>
             <label>Organization</label>
             <input type="text" ref="organization"/>
-            <label>Attendance for Event Required?></label>
+            <label>Attendance for Event Required?</label>
             <input type="checkbox" ref="attendance"/>
             <input type="submit"/>
             </form>

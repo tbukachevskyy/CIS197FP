@@ -19,10 +19,7 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, '..', 'public')));
 
 const eventsRouter = require('./routes/eventsRouter');
-app.use('/events', eventsRouter);
-
-//const userRouter =  require('./routes/userRouter');
-//app.use('/user', userRouter);
+app.use('/api', eventsRouter);
 
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '..', 'public', 'index.html'));

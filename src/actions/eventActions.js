@@ -1,7 +1,7 @@
 
 export function getFilteredEvents(filter) {
     return (dispatch) => {
-            url = '/events'
+            let url = '/api/events'
         let config = {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
@@ -29,3 +29,5 @@ export function changeFilter(filter) {
         filter: filter
     });
 };
+
+

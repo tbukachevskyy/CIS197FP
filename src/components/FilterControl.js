@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import changeFilter from '../actions/eventActions';
+import { changeFilter } from '../actions/eventActions';
 import { connect } from 'react-redux';
 
 class FilterControl extends Component {
@@ -10,8 +10,9 @@ class FilterControl extends Component {
 
     submit(e) {
         e.preventDefault();
+        console.log(this.refs.attendance.value);
         let filter = {
-            attendanceReq: this.refs.attendance.value == 'on' ? 'true' : 'false'
+            attendanceReq: this.refs.attendance.value === 'on' ? 'true' : 'false'
         };
         this.props.changeFilter(filter);
     }

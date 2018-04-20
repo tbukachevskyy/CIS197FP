@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { favoriteTweet } from '../actions/tweetActions';
-import { Link } from 'react-router-dom';
 
 class Event extends Component {
     constructor(props) {
@@ -29,10 +27,9 @@ class Event extends Component {
                 <p>
                     { this.props.event.eventAttendanceRequired }
                 </p>
-                <p>
-                    { this.props.event.foodtypes }
-                </p>
             </div>
         );
     }
 }
+
+export default connect()(Event);

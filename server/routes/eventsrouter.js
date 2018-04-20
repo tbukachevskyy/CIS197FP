@@ -23,11 +23,14 @@ eventsRouter.post('/new', function(req, res) {
       config.eventAttendanceRequired = true
     }
 
-    Event.find(config)
+    Event.getEventsByFilter(config)
     .then((events) => {
       events = events.sort((a,b) => {
         return b.date - a.date;
       });
+      for (let i = 0; i < events.length; i++) {
+        events[i].date = events[i].date.toDateString();
+      }
       res.json({response: 'success', data: events});
     })
     .catch((err) => {

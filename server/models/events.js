@@ -42,4 +42,20 @@ eventSchema.statics.createEvent = function (title, description, date, location,
     return newPost.save();
 }
 
+eventSchema.statics.getEventsByFilter = function(filter) {
+    return this.find(filter).then((mongoEvents) => {
+        let events = mongoEvents.map(mongoEvent => {
+            return { 
+                title: mongoEvent.title,
+                location: mongoEvent.location,
+                description: mongoEvent.description,
+                organization: mongoEvent.organization,
+                date: mongoEvent.date,
+                eventAttendanceRequired: mongoEvent.eventAttendanceRequired ? 'Attendance of event required' : 'Attendance of event not required'
+                };
+        })
+        return events;
+    });
+}
+
 module.exports = mongoose.model('Events', eventSchema);
