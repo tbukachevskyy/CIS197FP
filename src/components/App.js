@@ -6,6 +6,7 @@ import {
 import CreateEvent from './CreateEvent';
 import EventList from './EventList';
 import FilterControl from './FilterControl'
+import NavBar from './NavBar';
 
 class App extends Component {
   constructor(props) {
@@ -14,7 +15,8 @@ class App extends Component {
 
   render() {
     return (
-      <div>
+      <div className="container-fluid" >
+        <NavBar/>
         <div>
           <Switch>
           <Route path='/create' component={CreateEvent}/>

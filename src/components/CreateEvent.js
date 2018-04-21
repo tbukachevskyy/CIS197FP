@@ -15,7 +15,9 @@ class CreateEvent extends Component {
             time: this.refs.time.value,
             location: this.refs.location.value,
             organization: this.refs.organization.value,
-            attendance: (this.refs.attendance.value == 'on') ? true : false
+            attendance: (this.refs.attendance.value == 'on') ? 'true' : 'false',
+            vegan: (this.refs.vegan.value == 'on') ? 'true' : 'false',
+            vegetarian: (this.refs.vegetarian.value == 'on') ? 'true' : 'false'
         }
         let config = {
             method: 'POST',
@@ -34,20 +36,32 @@ class CreateEvent extends Component {
     render() {
         return (
             <form onSubmit={this.submit.bind(this)}>
-            <label>Title</label>
-            <input type="text" ref="title"/>
-            <label>Description</label>
-            <input type="text" ref="description"/>
-            <label>Date</label>
-            <input type="date" ref="date"/>
-            <label>Time</label>
-            <input type="time" ref="time"/>
-            <label>Location</label>
-            <input type="text" ref="location"/>
-            <label>Organization</label>
-            <input type="text" ref="organization"/>
-            <label>Attendance for Event Required?</label>
-            <input type="checkbox" ref="attendance"/>
+            <div className="form-group">
+                <label for="title">Title</label>
+                <input className="form-control" type="text" ref="title" id="title"/>
+                <label for="description">Description</label>
+                <input className="form-control" type="text" ref="description" id="description"/>
+                <label for="date">Date</label>
+                <input className="form-control" type="date" ref="date" id="date"/>
+                <label for="time">Time</label>
+                <input  className="form-control"type="time" ref="time" id="time"/>
+                <label for="location">Location</label>
+                <input className="form-control" type="text" ref="location" id="location"/>
+                <label for="organization">Organization</label>
+                <input className="form-control" type="text" ref="organization" id="organization"/>
+            </div>
+            <div className="form-check form-group">
+                <input className="form-check-input" type="checkbox" ref="attendance" id="attendance"/>
+                <label for="attendance">Attendance for Event Required?</label>
+            </div>
+            <div className="form-check form-group">
+                <input className="form-check-input" type="checkbox" ref="vegetarian" id="vegetarian"/>
+                <label for="vegetarian">Vegetarian Options Included?</label>
+            </div>
+            <div className="form-check form-group">
+                <input className="form-check-input" type="checkbox" ref="vegan" id="vegan"/>
+                <label for="vegan">Vegan Options Included?</label>
+            </div>
             <input type="submit"/>
             </form>
         );

@@ -24,9 +24,12 @@ class EventList extends Component {
 
     render() {
         return (
-            <div>
-                <FilterControl />
-                <div>
+            <div className="row">
+                <div className="col-4">
+                    <FilterControl />
+                </div>
+                <div className="col-6">
+                    <h3> Events </h3>
                     {
                         this.props.events.map((event, key) => <Event event={event} key={key} />)
                     }

@@ -5,10 +5,11 @@ let eventsRouter = express.Router();
 
 eventsRouter.post('/new', function(req, res) {
   let date = new Date(req.body.date + 'T' + req.body.time);
-  console.log(req.body.date + 'T' + req.body.time);
-  let attendanceReq = req.body.attendanceReq == 'true' ? true : false
+  let attendanceReq = req.body.attendanceReq === 'true' ? true : false;
+  let vegan = req.body.vegan === 'true' ? true : false;
+  let vegetarian = req.body.vegetarian === 'true' ? true : false;
     Event.createEvent(req.body.title, req.body.description, date, 
-      req.body.location, req.body.organization, attendanceReq)
+      req.body.location, req.body.organization, attendanceReq, vegetarian, vegan)
       .then((event) => {
         res.json({response: 'success', data: event});
       })
@@ -19,10 +20,15 @@ eventsRouter.post('/new', function(req, res) {
 
   eventsRouter.post('/events', function(req, res) {
     let config = {};
-    if (req.body.attendanceReq === 'true') {
-      config.eventAttendanceRequired = true
+    if (!req.body.attendanceReq) {
+      config.eventAttendanceRequired = false
     }
-
+    if (req.body.veganReq) {
+      config.veganOptions = true
+    }
+    if (req.body.vegetarianReq) {
+      config.vegetarianOptions = true
+    }
     Event.getEventsByFilter(config)
     .then((events) => {
       events = events.sort((a,b) => {
@@ -34,7 +40,7 @@ eventsRouter.post('/new', function(req, res) {
       res.json({response: 'success', data: events});
     })
     .catch((err) => {
-      res.json({response: 'failure', data: err});
+      res.json({response: 'failure', data: err.message});
     });
   });
 
